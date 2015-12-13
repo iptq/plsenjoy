@@ -1,0 +1,32 @@
+<% include ../includes/header %>
+
+<div class="osu-layout__row osu-layout__row--page">
+	<h1 class="text-center">Mappool</h1>
+	<p class="text-center">Come back later!</p>
+	<p>&nbsp;</p>
+</div>
+
+<% if (page.mappool) { %>
+	<div class="osu-layout__row osu-layout__row--page">
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+		<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+		<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+		<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+		</ul>
+		
+		<!-- Tab panes -->
+		<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="home">...a</div>
+		<div role="tabpanel" class="tab-pane" id="profile">...b</div>
+		<div role="tabpanel" class="tab-pane" id="messages">...c</div>
+		<div role="tabpanel" class="tab-pane" id="settings">...d</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	</script>
+<% } %>
+
+<% include ../includes/footer %>

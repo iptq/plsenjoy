@@ -1,0 +1,145 @@
+<% include ../includes/header %>
+
+<% if (page.logged_in) { %>
+	<div class="osu-layout__row osu-layout__row--page header-row no-print" id="store-header" style="height:auto;padding:80px;">
+		<center>
+			<div style="display:block;position:relative;height:auto;">
+				<% if (page.user_info.email_verified && page.user_info.osu_verified) { %>
+				<h1 data-toggle="tooltip" data-placement="top" title="Click to edit team name."><span contenteditable id="teamname"><%- page.user_info.teamname %></span></h1>
+				<% } else { %>
+				<h1><span><%- page.user_info.teamname %></span></h1>
+				<% } %>
+			</div>
+			<div style="display:block;position:relative;height:auto;">
+				<div class="label label-<%- page.user_info.status.color %>">Status: <%- page.user_info.status.status %></div>
+			</div>
+		</center>
+	</div>
+	
+	<% if (!(page.user_info.email_verified && page.user_info.osu_verified)) { %>
+		<div class="osu-layout__section osu-layout__section--full js-content community_forum-forums-index">
+			<div class="osu-layout__row">
+				<div class="alert alert-warning">
+					Before you can start making your team, we need you to verify your account. Please complete the following:
+					<ul>
+						<% if (page.user_info.email_verified != true) { %>
+							<li>Click to verify your email: <a href="javascript:resend_verification();">resend verification email</a>.</li>
+						<% } %>
+						<% if (page.user_info.osu_verified != true) { %>
+							<li>Click to verify your osu! account: <a href="javascript:resend_osu_verification();">send private message in osu!</a>
+								<ul>
+									<li>Make sure you have osu! open before you click that link.</li>
+									<li>Expect a private message from IOException. Turn on private messages if you haven't done so already.</li>
+								</ul>
+							</li>
+						<% } %>
+					</ul>
+				</div>
+			</div>
+		</div>
+	<% } else { %>
+		<div class="osu-layout__section osu-layout__section--full js-content community_forum-forums-index">
+			<div class="osu-layout__row">
+				<div id="forum-1" class="forum-category col-sm-12 forum-colour category-osu">
+					<div class="row forum-category-header forum-colour__bg--category-osu">
+						<div class="forum-category-header__name">Team Members</div>
+						<div class="forum-category-header__description"><%- page.user_info.team_members.length %> out of 3</div>
+					</div>
+					<div class="forums osu-layout__sub-row">
+						<div class="row">
+							<div class="col-md-12">
+								<p>You may add <b><%- 3 - page.user_info.team_members.length %></b> more members to your team. The order in which you add these members doesn't matter; the only distinction that will be made between the team members is that you are the captain.</p>
+							</div>
+							<div class="col-md-12">
+								<% for(var i=0; i<page.user_info.team_members.length; i++) { %>
+									<div class="col-sm-4 col-xs-12">
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+													<span class="flag-country " title="<%- page.user_info.team_members[i].country %>" style="background-image:url('/images/flags/<%- page.user_info.team_members[i].country %>.png');vertical-align:middle;"></span>
+													<% if (page.user_info.team_members[i].captain == true) { %><b><% } %>
+													<%- page.user_info.team_members[i].username %>
+													<% if (page.user_info.team_members[i].captain == true) { %></b><% } %>
+													<% if (page.user_info.team_members[i].captain != true) { %>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="remove_member('<%- page.user_info.team_members[i].username %>');"><span aria-hidden="true">&times;</span></button>
+													<% } %>
+												</h4>
+											</div>
+											<div class="panel-body">
+												<b>Role:</b> <%- page.user_info.team_members[i].captain ? "Captain" : "Team Member" %><br />
+												<b>Rank:</b> #<%- page.user_info.team_members[i].rank %> (#<%- page.user_info.team_members[i].country_rank %> <%- page.user_info.team_members[i].country %>)<br />
+												<b>Accuracy:</b> <%- Math.round(page.user_info.team_members[i].accuracy*100)/100 %>%<br />
+											</div>
+										</div>
+									</div>
+								<% } %>
+								<% if (page.user_info.team_members.length < 3) { %>
+									<div class="col-sm-4 col-xs-12">
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<h4 class="panel-title">Add Member</h4>
+											</div>
+											<div class="panel-body">
+												<div id="add_member_msg"></div>
+												<form action="javascript:void(0);" id="add_member_form" onsubmit="add_member();return false;">
+													<fieldset>
+														<div class="form__input-group form-group form-group--compact">
+															<input class="modal-af form-group__control form-control form-group__control--compact" name="add_member_username" id="add_member_username" type="text" placeholder="osu! Username" required="" autocomplete="off">
+														</div>
+														<p style="text-align:center;margin-top:5px;"><input type="submit" class="btn-osu btn-osu--lite" value="Add" /></p>
+													</fieldset>
+												</form>
+											</div>
+										</div>
+									</div>
+								<% } %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			var add_member = function() {
+				var username = $("#add_member_username").val();
+				var disable = "#add_member_form input";
+				$(disable).attr("disabled", "disabled");
+				$.post("/api/team/add_member", {
+					_csrf: "<%- page.csrf_token %>",
+					username: username,
+				}, function(result) {
+					display_message("#add_member_msg", (result.success == 1 ? "success" : "danger"), result.message, function() {
+						if (result.success == 1) { location.reload(true); }
+						else { $(disable).removeAttr("disabled"); }
+					});
+				});
+			};
+			var remove_member = function(username) {
+				$.post("/api/team/delete_member", {
+					_csrf: "<%- page.csrf_token %>",
+					username: username
+				}, function(result) {
+					if (result.success == 1) { location.reload(true); }
+				});
+			};
+			$("#teamname").on("keyup", function(e) {
+				var newname = $("#teamname").text();
+				$.post("/api/team/rename", {
+					_csrf: "<%- page.csrf_token %>",
+					newname: newname
+				}, function(result) {
+					if (result.success != 1) { $("#teamname").html("<%- page.user_info.teamname %>"); }
+				}).fail(function() {
+					$("#teamname").html("<%- page.user_info.teamname %>");
+				});
+			});
+		</script>
+	<% } %>
+<% } else { %>
+	<script type="text/javascript">
+		location.href = "/login";
+	</script>
+<% } %>
+
+<% include ../includes/footer %>

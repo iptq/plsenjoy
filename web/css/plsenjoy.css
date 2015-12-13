@@ -1,0 +1,13 @@
+#teamname {
+	outline: none;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+#teamname:hover {
+	border: 1px solid #ffb3d5;
+}
+
+#teamname:focus {
+	border: 1px solid #ff66aa;
+}

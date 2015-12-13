@@ -1,0 +1,14 @@
+<% include ../includes/header %>
+
+<div class="osu-layout__row osu-layout__row--page">
+	<h1 class="text-center">Thanks for verifying your account!</h1>
+	<div class="text-center">You'll be redirected to the <a href="/team">team</a> page in 5 seconds...</div>
+</div>
+
+<script type="text/javascript">
+	setTimeout(function() {
+		location.href = "/team";
+	}, 5000);
+</script>
+
+<% include ../includes/footer %>

@@ -1,0 +1,63 @@
+<% include ../includes/header %>
+
+<div class="osu-layout__row osu-layout__row--page">
+	<h1 class="text-center">Team Listing</h1>
+</div>
+
+<div class="osu-layout__section osu-layout__section--full js-content community_forum-forums-index">
+	<div class="osu-layout__row">
+		<div id="forum-1" class="forum-category col-sm-12 forum-colour category-osu">
+			<div class="row forum-category-header forum-colour__bg--category-osu">
+				<div class="forum-category-header__name">Approved Teams</div>
+				<div class="forum-category-header__description">You're ready to go!</div>
+			</div>
+			<div class="forums osu-layout__sub-row">
+				<div class="row">
+					<div class="col-md-12">
+						<p>None yet.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="forum-2" class="forum-category col-sm-12 forum-colour category-beatmaps">
+			<div class="row forum-category-header forum-colour__bg--category-beatmaps">
+				<div class="forum-category-header__name">Pending Teams</div>
+				<div class="forum-category-header__description">Waiting for staff approval...</div>
+			</div>
+			<div class="forums osu-layout__sub-row">
+				<div class="row">
+					<div class="col-md-12">
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>Team Name</th>
+									<th>Players</th>
+									<th>Average Rank</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(var i=0; i<page.all_teams.length; i++) { %>
+									<tr>
+										<td><%- page.all_teams[i].teamname %></td>
+										<td>
+											<% for (var j=0; j<page.all_teams[i].members.length; j++) { %>
+												<div>
+													<span class="flag-country " title="<%- page.all_teams[i].members[j].country %>" style="background-image:url('/images/flags/<%- page.all_teams[i].members[j].country %>.png');vertical-align:middle;"></span>
+													<a href="https://osu.ppy.sh/u/<%- page.all_teams[i].members[j].osuid %>" target="_blank"><%- page.all_teams[i].members[j].username %></a>
+													#<%- page.all_teams[i].members[j].rank %> <small>(#<%- page.all_teams[i].members[j].country_rank %> <%- page.all_teams[i].members[j].country %>)</small>
+												</div>
+											<% } %>
+										</td>
+										<td><%- Math.round(page.all_teams[i].avgrank*100)/100 %></td>
+									</tr>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include ../includes/footer %>

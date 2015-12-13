@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title><% if (page.title.length > 0) { %><%= page.title %> - <% } %>pls enjoy tournament</title>
+		<link href="//fonts.googleapis.com/css?family=Exo+2:300,300italic,200,400,400italic,500,500italic,700,700italic,900" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/css/osu.min.css" />
+		<link rel="stylesheet" href="/css/plsenjoy.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" integrity="sha384-fj9YEHKNa/e0CNquG4NcocjoyMATYo1k2Ff5wGB42C/9AwOlJjDoySPtNJalccfI" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha384-tSi+YsgNwyohDGfW/VhY51IK3RKAPYDcj1sNXJ16oRAyDP++K0NCzSCUW78EMFmf" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" integrity="sha384-VI5+XuguQ/l3kUhh4knz7Hxptx47wpQbVRDnp8v7Vvuhzwn1PEYb/uvtH6KLxv6d" crossorigin="anonymous"></script>
+		<script src="/js/pet.js" type="text/javascript"></script>
+		<link rel="shortcut icon" href="/images/favicon.png">
+	</head>
+	<body class="osu-layout osu-layout--body community section action-forum-forums-index">
+		<div id="overlay" style="display: none;"></div>
+		<div class="blackout" style="display: none;"></div>
+		<nav class="osu-layout__section osu-layout__section--minimum no-print">
+			<div id="nav-background" class="hidden-xs">
+				<div id="nav-triangles-1" class="nav-triangles"></div>
+				<div id="nav-triangles-2" class="nav-triangles"></div>
+				<div id="nav-triangles-3" class="nav-triangles"></div>
+				<div id="nav-gradient-overlay"></div>
+			</div>
+			<div class="hidden-xs osu-layout__row" id="nav-sm">
+				<a class="flex-none nav-logo" href="/"></a>
+				<div id="nav-links">
+					<ul id="nav-menu" class="js-menu osu-nav__menu">
+						<li class="community active"><a class="osu-nav__link osu-nav__link--active" href="/">about</a></li>
+						<li><a class="osu-nav__link yellow-normal" href="https://osu.ppy.sh/forum/t/391380" target="_blank">forum post</a></li>
+						<li><a class="osu-nav__link" href="/mappool">mappool</a></li>
+						<li><a class="osu-nav__link" href="/teams">teams</a></li>
+						<% if (page.logged_in == true) { %>
+							<li><a class="osu-nav__link yellow-normal" href="/team">my team</a></li>
+						<% } %>
+					</ul>
+					<div id="nav-page-title">
+						<span class="sub1">pls enjoy tournament</span>
+					</div>
+				</div>
+				<div class="flex-none nav-user-bar-container">
+					<% if (page.logged_in == true) { %>
+						<div id="nav-user-bar">
+							<a href="/team" title="My Team"><%- page.user_info.username %></a>
+							<p style="text-align:right;"><a href="/logout"><small style="font-size:0.5em;">Logout <i class="fa fa-fw fa-sign-out"></i></small></a></p>
+						</div>
+						<a class="avatar avatar--nav avatar--guest js-nav-avatar" href="/team" style="background-image:url(https://a.ppy.sh/<%- page.user_info.osuid %>);" title="<%- page.user_info.username %>"></a>
+					<% } else { %>
+						<div id="nav-user-bar">
+							<a href="/login">Not Logged In</a>
+						</div>
+						<a class="avatar avatar--nav avatar--guest js-nav-avatar" href="/login" title="Guest"></a>
+					<% } %>
+				</div>
+			</div>
+		</nav>
