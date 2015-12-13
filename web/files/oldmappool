@@ -1,0 +1,77 @@
+
+	<div class="osu-layout__row osu-layout__row--page">
+		<h6 class="text-center"><a href="/files/groupstage.zip"><i class="fa fa-download"></i> Download Group Stage Maps</a></h6>
+	</div>
+	
+	<div class="osu-layout__section osu-layout__section--full js-content community_forum-forums-index">
+	<% for (var i=0; i<page.mappool.categories.length; i++) { %>
+		<% if (page.mappool.maps[page.mappool.categories[i]].length > 0) { %>
+		<div class="osu-layout__row">
+			<div id="forum-1" class="forum-category col-sm-12 forum-colour category-osu">
+				<div class="row forum-category-header" style="background-color:#<%- page.mappool.categories[i].charCodeAt(0).toString(16)+page.mappool.categories[i].charCodeAt(2).toString(16)+page.mappool.categories[i].charCodeAt(4).toString(16) %>;">
+					<div class="forum-category-header__name"><%- page.mappool.categories[i] %></div>
+					<div class="forum-category-header__description"><%- page.mappool.maps[page.mappool.categories[i]].length %> map(s).</div>
+				</div>
+				<div class="forums osu-layout__sub-row">
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-striped table-hover">
+								<thead>
+									<tr>
+										<th>Artist</th>
+										<th>Title</th>
+										<th>Difficulty</th>
+										<th>Mapped by</th>
+										<th>Length</th>
+										<th>BPM</th>
+										<th>Stars</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% for (var j=0; j<page.mappool.maps[page.mappool.categories[i]].length; j++) { %>
+										<tr>
+											<td>
+												<%- page.mappool.maps[page.mappool.categories[i]][j].artist %>
+											</td>
+											<td>
+												<a href="https://osu.ppy.sh/b/<%- page.mappool.maps[page.mappool.categories[i]][j].b %>" target="_blank"><%- page.mappool.maps[page.mappool.categories[i]][j].title %></a>
+											</td>
+											<td>
+												<%- page.mappool.maps[page.mappool.categories[i]][j].difficulty %>
+											</td>
+											<td>
+												<a href="https://osu.ppy.sh/u/<%- page.mappool.maps[page.mappool.categories[i]][j].mapper.osuid %>" target="_blank"><%- page.mappool.maps[page.mappool.categories[i]][j].mapper.username %></a>
+											</td>
+											<td>
+												<%- Math.floor(page.mappool.maps[page.mappool.categories[i]][j].length / 60) %>:<%- (Math.pow(10, 2) + ~~((page.mappool.maps[page.mappool.categories[i]][j].length) % 60)).toString().substring(1) %>
+												<% if (page.mappool.categories[i] == "DoubleTime") { %>
+													&raquo;
+													<span style="color:#F00;font-weight:bold;">
+														<%- Math.floor((page.mappool.maps[page.mappool.categories[i]][j].length / 1.5) / 60) %>:<%- (Math.pow(10, 2) + ~~(((page.mappool.maps[page.mappool.categories[i]][j].length / 1.5)) % 60)).toString().substring(1) %>
+													</span>
+												<% } %>
+											</td>
+											<td>
+												<%- page.mappool.maps[page.mappool.categories[i]][j].bpm %>
+												<% if (page.mappool.categories[i] == "DoubleTime") { %>
+													&raquo;
+													<span style="color:#F00;font-weight:bold;">
+														<%- Math.floor(page.mappool.maps[page.mappool.categories[i]][j].bpm * 1.5) %>
+													</span>
+												<% } %>
+											</td>
+											<td>
+												<%- Math.round(page.mappool.maps[page.mappool.categories[i]][j].stars * 100) / 100 %>
+											</td>
+										</tr>
+									<% } %>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% } %>
+	<% } %>
+	</div>
