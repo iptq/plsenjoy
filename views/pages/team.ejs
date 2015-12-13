@@ -7,7 +7,7 @@
 				<% if (page.user_info.email_verified && page.user_info.osu_verified) { %>
 				<h1 data-toggle="tooltip" data-placement="top" title="Click to edit team name."><span contenteditable id="teamname"><%- page.user_info.teamname %></span></h1>
 				<% } else { %>
-				<h1><span><%- page.user_info.teamname %></span></h1>
+				<h1><span><%= page.user_info.teamname %></span></h1>
 				<% } %>
 			</div>
 			<div style="display:block;position:relative;height:auto;">
@@ -100,6 +100,7 @@
 			</div>
 		</div>
 		
+		<div style="display:none;" id="teamname_original"><%= page.user_info.teamname %></div>
 		<script type="text/javascript">
 			var add_member = function() {
 				var username = $("#add_member_username").val();
@@ -129,9 +130,9 @@
 					_csrf: "<%- page.csrf_token %>",
 					newname: newname
 				}, function(result) {
-					if (result.success != 1) { $("#teamname").html("<%- page.user_info.teamname %>"); }
+					if (result.success != 1) { $("#teamname").html($("#teamname_original").text()); }
 				}).fail(function() {
-					$("#teamname").html("<%- page.user_info.teamname %>");
+					$("#teamname").html($("#teamname_original").text());
 				});
 			});
 		</script>
