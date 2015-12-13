@@ -11,3 +11,10 @@
 #teamname:focus {
 	border: 1px solid #ff66aa;
 }
+
+.nav-logo {
+	background-image: url(/images/logo.png) !important;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
