@@ -154,7 +154,7 @@ exports.get_all_teams = function(callback) {
 				async.each(members, function(member, callback2) {
 					user.get_user_data(member, function(userdata) {
 						delete userdata["expire"];
-						// userdata["captain"] = userdata["username_lower"] == 
+						userdata["captain"] = userdata["username_lower"] == team["username_lower"]
 						teammembers.push(userdata);
 						callback2();
 					});
