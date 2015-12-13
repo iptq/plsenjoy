@@ -14,11 +14,9 @@ exports.people = [
 ];
 
 exports.get_user_data = function(username, callback) {
-	console.log("Looking up " + username + "...");
 	common.db.collection("usercache").find({
 		username_lower: username.toLowerCase()
 	}).toArray(function(err, doc) {
-		console.log(doc);
 		if (doc.length != 1 || doc[0].expire > ~~(moment().format("X"))) {
 			request.get("https://osu.ppy.sh/api/get_user?k=" + process.env.OSU_APIKEY + "&u=" + username, function(error, response, body) {
 				var result = JSON.parse(body);
@@ -190,10 +188,10 @@ exports.verify_osu = function(req, res) {
 		return res.send({ success: 0, message: "Code is missing or broken (1)." });
 	}
 	common.db.collection("users").update({
-		verify_code: code
+		osu_verify_code: code
 	}, {
 		$set: { osu_verified: true },
-		$unset: { verify_code: "" },
+		$unset: { osu_verify_code: "" },
 	}, function(err, result) {
 		if (err) { console.log(err); return res.send({ success: 0, message: "Internal error (10)." }); }
 		// console.log(result["result"]["nModified"]);
@@ -248,7 +246,7 @@ exports.send_osu_verification = function(username, callback) {
 					client.destroy();
 					var doc = {
 						osu_verified: false,
-						verify_code: verify_code,
+						osu_verify_code: verify_code,
 					}
 					common.db.collection("users").update({
 						username_lower: username.toLowerCase(),

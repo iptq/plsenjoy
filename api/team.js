@@ -22,14 +22,12 @@ exports.add_member = function(req, res) {
 				}
 				
 				user_info.team_members.push(user_info.username_lower);
-				console.log(user_info["team_members"]);
 				for(var i=0; i<user_info["team_members"].length; i++) {
 					if (user_info["team_members"][i] == username.toLowerCase())
 						return res.send({ success: 0, message: "That user is already a member of this team!" });
 				}
 				
 				user.get_user_data(username, function(data) {
-					console.log(data);
 					var rank = data["rank"];
 					if (!("osuid" in data)) {
 						return res.send({ success: 0, message: "That user doesn't exist!" });
