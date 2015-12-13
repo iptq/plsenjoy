@@ -19,34 +19,38 @@ exports.get_user_data = function(username, callback) {
 	}).toArray(function(err, doc) {
 		if (doc.length != 1 || doc[0].expire > ~~(moment().format("X"))) {
 			request.get("https://osu.ppy.sh/api/get_user?k=" + process.env.OSU_APIKEY + "&u=" + username, function(error, response, body) {
-				var result = JSON.parse(body);
-				if (result.length != 1) {
-					callback({ });
-				} else {
-					var data = result[0];
-					var userdoc = {
-						osuid: ~~(data["user_id"]),
-						rank: ~~(data["pp_rank"]),
-						country_rank: ~~(data["pp_country_rank"]),
-						playcount: ~~(data["playcount"]),
-						accuracy: parseFloat(data["accuracy"]),
-						country: data["country"],
-						expire: ~~(moment().add(8, "hours").format("X")),
-						username: data["username"],
-						username_lower: data["username"].toLowerCase()
-					};
-					if ("team" in doc) {
-						userdoc["team"] = doc["team"];
+				try {
+					var result = JSON.parse(body);
+					if (result.length != 1) {
+						callback({ });
+					} else {
+						var data = result[0];
+						var userdoc = {
+							osuid: ~~(data["user_id"]),
+							rank: ~~(data["pp_rank"]),
+							country_rank: ~~(data["pp_country_rank"]),
+							playcount: ~~(data["playcount"]),
+							accuracy: parseFloat(data["accuracy"]),
+							country: data["country"],
+							expire: ~~(moment().add(8, "hours").format("X")),
+							username: data["username"],
+							username_lower: data["username"].toLowerCase()
+						};
+						if ("team" in doc) {
+							userdoc["team"] = doc["team"];
+						}
+						common.db.collection("usercache").update({
+							osuid: userdoc["osuid"]
+						}, {
+							$set: userdoc
+						}, {
+							upsert: true
+						}, function() {
+							callback(userdoc);
+						});
 					}
-					common.db.collection("usercache").update({
-						osuid: userdoc["osuid"]
-					}, {
-						$set: userdoc
-					}, {
-						upsert: true
-					}, function() {
-						callback(userdoc);
-					});
+				} catch (e) {
+					callback({ });
 				}
 			});
 		} else {
