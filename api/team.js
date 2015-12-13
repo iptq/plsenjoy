@@ -158,18 +158,24 @@ exports.get_all_teams = function(callback) {
 						callback2();
 					});
 				}, function() {
-					team["members"] = teammembers;
+					var xteam = { };
+					xteam["teamname"] = team["teamname"];
+					xteam["timestamp"] = team["timestamp"];
+					xteam["members"] = teammembers;
 					var avgrank = 0.0;
 					for(var i=0; i<teammembers.length; i++) {
 						avgrank += teammembers[i].rank;
 					}
 					avgrank /= 1.0 * teammembers.length;;
-					team["avgrank"] = avgrank;
-					teams.push(team);
+					xteam["avgrank"] = avgrank;
+					teams.push(xteam);
 					callback1();
 				});
 			}
 		}, function() {
+			teams.sort(function(a, b) {
+				return a["timestamp"] - b["timestamp"];
+			});
 			callback(teams);
 		})/*
 		for(var i=0; i<docs.length; i++) {
