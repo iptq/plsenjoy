@@ -43,7 +43,11 @@
 											<% for (var j=0; j<page.all_teams[i].members.length; j++) { %>
 												<div>
 													<span class="flag-country " title="<%- page.all_teams[i].members[j].country %>" style="background-image:url('/images/flags/<%- page.all_teams[i].members[j].country %>.png');vertical-align:middle;"></span>
-													<a href="https://osu.ppy.sh/u/<%- page.all_teams[i].members[j].osuid %>" target="_blank"><%- page.all_teams[i].members[j].username %></a>
+													<a href="https://osu.ppy.sh/u/<%- page.all_teams[i].members[j].osuid %>" target="_blank">
+														<span <% if (page.all_teams[i].members[j].captain) { %>style="font-weight:bold;"<% } %>>
+															<%- page.all_teams[i].members[j].username %>
+														</span>
+													</a>
 													#<%- page.all_teams[i].members[j].rank %> <small>(#<%- page.all_teams[i].members[j].country_rank %> <%- page.all_teams[i].members[j].country %>)</small>
 												</div>
 											<% } %>

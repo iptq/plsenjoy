@@ -158,6 +158,11 @@ exports.get_all_teams = function(callback) {
 						callback2();
 					});
 				}, function() {
+					teammembers.sort(function(a, b) {
+						if (a["captain"]) return -1;
+						if (b["captain"]) return 1;
+						return (a.rank > b.rank ? -1 : 1);
+					});
 					var xteam = { };
 					xteam["teamname"] = team["teamname"];
 					xteam["timestamp"] = team["timestamp"];
