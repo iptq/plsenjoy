@@ -107,7 +107,7 @@ exports.register = function(req, res) {
 	}
 	
 	console.log(username.toLowerCase());
-	if (!(~~(moment().format("X")) > 1449993600 || exports.people.indexOf(username.toLowerCase()) >= 0)) {
+	if (!(false/*~~(moment().format("X")) > 1449993600*/ || exports.people.indexOf(username.toLowerCase()) >= 0)) {
 		return res.send({ success: 0, message: "Registration not open yet." });
 	}
 	
