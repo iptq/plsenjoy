@@ -55,7 +55,7 @@ var configurePublicPage = function(app, page) {
 						a({ all_teams: teams });
 					});
 				} else if (page["view"] == "mappool") {
-					if (logged_in && user.people.indexOf(req.signedCookies["username"]) >= 0) {
+					if (logged_in && user.people.indexOf(req.signedCookies["username"].toLowerCase()) >= 0) {
 						maps.get_mappool(function(mappool) {
 							a({ mappool: mappool });	
 						});

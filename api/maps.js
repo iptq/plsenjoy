@@ -4,6 +4,15 @@ var moment = require("moment");
 var request = require("request");
 var user = require("./user");
 
+var format_time = function(seconds) {
+	var minutes = Math.floor(seconds / 60);
+	seconds %= 60;
+	if (seconds < 10) {
+		seconds = "0" + seconds;
+	}
+	return minutes + ":" + seconds;
+}
+
 exports.get_map_data = function(beatmapid, callback) {
 	common.db.collection("mapcache").find({
 		b: beatmapid,
@@ -80,6 +89,8 @@ exports.get_mappool = function(callback) {
 				exports.get_map_data(bid, function(beatmapdata) {
 					user.get_user_data(beatmapdata["mapper"], function(mapperdata) {
 						beatmapdata["mapper"] = mapperdata;
+						beatmapdata["length_fmt"] = format_time(beatmapdata["length"]);
+						beatmapdata["stars"] = Math.round(beatmapdata["stars"] * 100) / 100;
 						data.push(beatmapdata);
 						callback2();
 					});
