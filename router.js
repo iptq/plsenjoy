@@ -55,7 +55,7 @@ var configurePublicPage = function(app, page) {
 						a({ all_teams: teams });
 					});
 				} else if (page["view"] == "mappool") {
-					if (logged_in) {
+					if (true) {
 						maps.get_mappool(function(mappool) {
 							a({ mappool: mappool });
 						});
