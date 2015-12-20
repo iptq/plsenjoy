@@ -65,10 +65,13 @@ exports.get_mappool = function(callback) {
 				255323, 687865, 296435
 			],
 			HardRock: [
-				535808, 794551, 296435
+				535808, 794551, 120080
 			],
 			DoubleTime: [
 				443272, 226667, 413446
+			],
+			FreeMod: [
+				460360, 169450, 315356
 			],
 			Tiebreaker: [
 				734910

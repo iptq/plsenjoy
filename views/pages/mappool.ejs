@@ -35,7 +35,7 @@
 			<% for(var i=0; i<stages.length; i++) {
 			var stage = stages[i], _stage_ = stages[i].replace(" ", "_"); %>
 				<div role="tabpanel" class="tab-pane <% if (i==0) { %>active<% } %>" id="<%= _stage_ %>">
-					<% var stage_mappool = page.mappool.maps[stage]; var categories = Object.keys(stage_mappool);
+					<% var stage_mappool = page.mappool.maps[stage]; var categories = [ "NoMod", "Hidden", "HardRock", "DoubleTime", "FreeMod", "Tiebreaker" ];//= Object.keys(stage_mappool);
 					for(var j=0; j<categories.length; j++) {
 					var category = categories[j]; %>
 						<h4><%= category %></h4>
