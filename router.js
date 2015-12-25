@@ -56,6 +56,7 @@ var configurePublicPage = function(app, page) {
 						for(var i=0; i<teams.length; i++) {
 							if(teams[i].approved) approved_teams.push(teams[i]);
 						}
+						console.log(approved_teams);
 						a({ all_teams: teams, approved_teams: approved_teams });
 					});
 				} else if (page["view"] == "mappool") {
