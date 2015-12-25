@@ -102,6 +102,9 @@ exports.rename = function(req, res) {
 			}).toArray(function(err, users) {
 				if (users.length != 1) { return res.send({ success: 0, message: "You're not logged in." }); }
 				var user_info = users[0];
+				if (user_info["approved"]) {
+					return res.send({ success: 0, message: "Your team is approved." });
+				}
 				
 				var newname = req.body.newname;
 				newname = newname.replace("\n", "");

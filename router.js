@@ -52,7 +52,11 @@ var configurePublicPage = function(app, page) {
 			(function(a) {
 				if (page["view"] == "teams") {
 					team.get_all_teams(function(teams) {
-						a({ all_teams: teams });
+						var approved_teams = [];
+						for(var i=0; i<teams.length; i++) {
+							if(teams[i].approved) approved_teams.push(teams[i]);
+						}
+						a({ all_teams: teams, approved_teams: approved_teams });
 					});
 				} else if (page["view"] == "mappool") {
 					if (true) {

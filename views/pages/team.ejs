@@ -4,7 +4,7 @@
 	<div class="osu-layout__row osu-layout__row--page header-row no-print" id="store-header" style="height:auto;padding:80px;">
 		<center>
 			<div style="display:block;position:relative;height:auto;">
-				<% if (page.user_info.email_verified && page.user_info.osu_verified) { %>
+				<% if (page.user_info.email_verified && page.user_info.osu_verified && !page.user_info.approved) { %>
 				<h1 data-toggle="tooltip" data-placement="top" title="Click to edit team name."><span contenteditable id="teamname"><%- page.user_info.teamname %></span></h1>
 				<% } else { %>
 				<h1><span><%= page.user_info.teamname %></span></h1>

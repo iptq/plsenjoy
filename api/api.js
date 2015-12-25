@@ -57,6 +57,7 @@ api.user_info = function(email, callback) {
 				teamname: userdoc["teamname"],
 				email_verified: userdoc["email_verified"] || false,
 				osu_verified: userdoc["osu_verified"] || false,
+				approved: userdoc["approved"] || false
 			};
 			var team_member_usernames = [ userdoc["username"] ];
 			if ("team_members" in userdoc && userdoc["team_members"].length > 0) {
