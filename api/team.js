@@ -171,6 +171,7 @@ exports.get_all_teams = function(callback) {
 					xteam["teamname"] = team["teamname"];
 					xteam["timestamp"] = team["timestamp"];
 					xteam["members"] = teammembers;
+					xteam["approved"] = team["approved"];
 					var avgrank = 0.0;
 					for(var i=0; i<teammembers.length; i++) {
 						avgrank += teammembers[i].rank;

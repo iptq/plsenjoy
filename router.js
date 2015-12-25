@@ -54,7 +54,7 @@ var configurePublicPage = function(app, page) {
 					team.get_all_teams(function(teams) {
 						var approved_teams = [];
 						for(var i=0; i<teams.length; i++) {
-							if(teams[i].approved) approved_teams.push(teams[i]);
+							if(teams[i].approved == true) approved_teams.push(teams[i]);
 						}
 						console.log(approved_teams);
 						a({ all_teams: teams, approved_teams: approved_teams });
