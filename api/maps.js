@@ -76,6 +76,26 @@ exports.get_mappool = function(callback) {
 			Tiebreaker: [
 				734910
 			]
+		},
+		"Round of 16": {
+			NoMod: [
+				230523, 516452, 655257, 211732, 225301, 255141
+			],
+			Hidden: [
+				255323, 687865, 296435
+			],
+			HardRock: [
+				535808, 794551, 120080
+			],
+			DoubleTime: [
+				443272, 226667, 413446
+			],
+			FreeMod: [
+				460360, 169450, 315356
+			],
+			Tiebreaker: [
+				734910
+			]
 		}
 	};
 	var mapdata = { };

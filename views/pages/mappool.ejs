@@ -6,16 +6,6 @@
 </div>
 
 <% if (page.mappool) { %>
-	<div class="osu-layout__row osu-layout__section osu-layout__section--full js-content store_getListing" style="margin-bottom: 20px !important;">
-		<div class="wide col-sm-12">
-			<a href="https://mega.nz/#!UJdT3Sya!V88wx5bJhCKnIpAOiF7Ayb2Uo9CiIff_EklzwrJViKE" class="product-box product-box--large" style="background-image: url('http://i.imgur.com/l33yB5c.jpg'); background-position: 0px -150px; background-repeat: none;" target="_blank">
-				<div class="product-box__text product-box__text--large">
-					<h1><i class="fa fa-fw fa-download"></i> Download</h1>
-					<p>Group Stage Maps</p>
-				</div>
-			</a>
-		</div>
-	</div>
 	<!--
 	<div class="osu-layout__row osu-layout__row--page">
 		<h6 class="text-center"><a href="https://mega.nz/#!UJdT3Sya!V88wx5bJhCKnIpAOiF7Ayb2Uo9CiIff_EklzwrJViKE"><i class="fa fa-download"></i> Download Group Stage Maps</a></h6>
@@ -25,7 +15,7 @@
 		<ul class="nav nav-tabs" role="tablist">
 			<% var stages = Object.keys(page.mappool.maps); %>
 			<% for(var i=0; i<stages.length; i++) {
-			var stage = stages[i], _stage_ = stages[i].replace(" ", "_"); %>
+			var stage = stages[i], _stage_ = stages[i].split(" ").join("_"); %>
 				<li role="presentation" class="<% if (i==0) { %>active<% } %>"><a href="#<%= _stage_ %>" aria-controls="<%= _stage_ %>" role="tab" data-toggle="tab"><%- stage %></a></li>
 			<% } %>
 		</ul>
@@ -33,8 +23,19 @@
 		<div class="tab-content">
 			<% var stages = Object.keys(page.mappool.maps); %>
 			<% for(var i=0; i<stages.length; i++) {
-			var stage = stages[i], _stage_ = stages[i].replace(" ", "_"); %>
+			var stage = stages[i], _stage_ = stages[i].split(" ").join("_"); %>
 				<div role="tabpanel" class="tab-pane <% if (i==0) { %>active<% } %>" id="<%= _stage_ %>">
+					<div class="osu-layout__row osu-layout__section osu-layout__section--full js-content store_getListing" style="margin-bottom: 20px !important;">
+						<div class="wide col-sm-12">
+							<a href="https://mega.nz/#!UJdT3Sya!V88wx5bJhCKnIpAOiF7Ayb2Uo9CiIff_EklzwrJViKE" class="product-box product-box--large" style="background-image: url('http://i.imgur.com/l33yB5c.jpg'); background-position: 0px -150px; background-repeat: none;" target="_blank">
+								<div class="product-box__text product-box__text--large">
+									<h1><i class="fa fa-fw fa-download"></i> Download</h1>
+									<p><%- stage %> Maps</p>
+								</div>
+							</a>
+						</div>
+					</div>
+					
 					<% var stage_mappool = page.mappool.maps[stage]; var categories = [ "NoMod", "Hidden", "HardRock", "DoubleTime", "FreeMod", "Tiebreaker" ];//= Object.keys(stage_mappool);
 					for(var j=0; j<categories.length; j++) {
 					var category = categories[j]; %>
@@ -73,6 +74,7 @@
 	</div>
 	
 	<script type="text/javascript">
+		
 	</script>
 <% } %>
 
