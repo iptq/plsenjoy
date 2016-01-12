@@ -98,6 +98,10 @@ exports.get_mappool = function(callback) {
 			]
 		}
 	};
+	var downloads = {
+		"Group Stage": "https://mega.nz/#!UJdT3Sya!V88wx5bJhCKnIpAOiF7Ayb2Uo9CiIff_EklzwrJViKE",
+		"Round of 16": "https://mega.nz/#!I8dEnSDZ!YR628sPfm44WJXeO_s9hsM2NbjGgeUAelcOSTmRgt7U"
+	};
 	var mapdata = { };
 	async.each(Object.keys(stages), function(stage, callback3) {
 		// console.log(stage);
@@ -127,7 +131,7 @@ exports.get_mappool = function(callback) {
 			callback3();
 		});
 	}, function() {
-		var obj = { maps: mapdata };
+		var obj = { maps: mapdata, downloads: downloads };
 		callback(obj);
 	});
 };
