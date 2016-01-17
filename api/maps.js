@@ -91,7 +91,7 @@ exports.get_mappool = function(callback) {
 				694701, 361011, 295857
 			],
 			FreeMod: [
-				730027, 261725, 295857
+				730027, 261725, 290581
 			],
 			Tiebreaker: [
 				721158
