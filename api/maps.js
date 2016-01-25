@@ -116,12 +116,33 @@ exports.get_mappool = function(callback) {
 			Tiebreaker: [
 				817623, 735021, 678340
 			]
+		},
+		"Round of 4": {
+			NoMod: [
+				679779, 563946, 574050, 536455, 509346, 541797, 378781, 596081
+			],
+			Hidden: [
+				356030, 662111, 594301, 478437
+			],
+			HardRock: [
+				835941, 412306, 382930, 203906
+			],
+			DoubleTime: [
+				493755, 196280, 634245, 157205
+			],
+			FreeMod: [
+				150837, 386728, 404440, 110628
+			],
+			Tiebreaker: [
+				804643, 759192, 450766
+			]
 		}
 	};
 	var downloads = {
 		"Group Stage": "https://mega.nz/#!UJdT3Sya!V88wx5bJhCKnIpAOiF7Ayb2Uo9CiIff_EklzwrJViKE",
 		"Round of 16": "https://mega.nz/#!I8dEnSDZ!YR628sPfm44WJXeO_s9hsM2NbjGgeUAelcOSTmRgt7U",
-		"Round of 8": "https://mega.nz/#!Mx9AGIJZ!avqbWQD8cAVlm9AC_HqChvwG1QnYhkP84DKBUQzGaTg"
+		"Round of 8": "https://mega.nz/#!Mx9AGIJZ!avqbWQD8cAVlm9AC_HqChvwG1QnYhkP84DKBUQzGaTg",
+		"Round of 4": "https://mega.nz/#!F5MQ3T4T!PbI0d9YvjsIjlmZ9dvImfyBpNJr1SYRtCI3NDpZvwaE"
 	};
 	var mapdata = { };
 	async.each(Object.keys(stages), function(stage, callback3) {
