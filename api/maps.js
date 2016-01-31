@@ -136,13 +136,34 @@ exports.get_mappool = function(callback) {
 			Tiebreaker: [
 				804643, 759192, 450766
 			]
+		},
+		"Round of 2": {
+			NoMod: [
+				373056, 633375, 687624, 658561, 588523, 837694, 588975, 764292
+			],
+			Hidden: [
+				676172, 763946, 95954, 622407
+			],
+			HardRock: [
+				171256, 326807, 267275, 655300
+			],
+			DoubleTime: [
+				728186, 289275, 388170, 98452
+			],
+			FreeMod: [
+				425761, 138008, 339640, 742975
+			],
+			Tiebreaker: [
+				644971, 495651, 550578
+			]
 		}
 	};
 	var downloads = {
 		"Group Stage": "https://mega.nz/#!UJdT3Sya!V88wx5bJhCKnIpAOiF7Ayb2Uo9CiIff_EklzwrJViKE",
 		"Round of 16": "https://mega.nz/#!I8dEnSDZ!YR628sPfm44WJXeO_s9hsM2NbjGgeUAelcOSTmRgt7U",
 		"Round of 8": "https://mega.nz/#!Mx9AGIJZ!avqbWQD8cAVlm9AC_HqChvwG1QnYhkP84DKBUQzGaTg",
-		"Round of 4": "https://mega.nz/#!F5MQ3T4T!PbI0d9YvjsIjlmZ9dvImfyBpNJr1SYRtCI3NDpZvwaE"
+		"Round of 4": "https://mega.nz/#!F5MQ3T4T!PbI0d9YvjsIjlmZ9dvImfyBpNJr1SYRtCI3NDpZvwaE",
+		"Round of 2": "https://mega.nz/#!1klWlKyK!MEkGJ64XT5Ffq-KiA9cIG77nfgQzi71v4XzNFUyMbvA"
 	};
 	var mapdata = { };
 	async.each(Object.keys(stages), function(stage, callback3) {
